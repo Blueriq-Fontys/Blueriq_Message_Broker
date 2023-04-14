@@ -1,10 +1,10 @@
-package com.rabbitmq.message_broker_blueriq;
+package com.example.messagingrabbitmq;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MessageBrokerBlueriqApplicationTests {
+class MessagingRabbitmqApplicationTests {
 
 	@Test
 	void contextLoads() {
