@@ -1,5 +1,6 @@
 package com.example.messagingrabbitmq;
 
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CountDownLatch;
@@ -7,14 +8,21 @@ import java.util.concurrent.CountDownLatch;
 @Component
 public class Receiver {
 
-    private CountDownLatch latch = new CountDownLatch(1);
+    String returnMessage = "";
 
-    public void receiveMessage(String message){
-        System.out.println("Received <" + message + ">");
-        latch.countDown();
+    public String getReturnMessage() {
+        return returnMessage;
     }
 
-    public CountDownLatch getLatch(){
-        return latch;
+    public void setReturnMessage(String returnMessage) {
+        this.returnMessage = returnMessage;
+    }
+
+    @RabbitListener(queues = MessagingRabbitmqApplication.queueName)
+    public void receiveMessage(String message) {
+        System.out.println("Received <" + message + ">");
+        setReturnMessage(message);
     }
 }
+
+
